@@ -1,3 +1,5 @@
+from unicodedata import name
+from urllib import response
 from flask import Flask, jsonify, request
 
 # Intitialise the app
@@ -14,4 +16,10 @@ def index():
     4. If first name is provided byt second name is not provided: respond with "Hello, <first-name>!"
     5. If both names are provided: respond with a question, "Is your name <fist-name> <second-name>
     """
-    return jsonify("TODO")
+    name = request.args.get("name")
+    if not name:
+        response={"status":"error"}
+    else:
+        response={"data":f"Hello {name}"}
+    
+    return jsonify(response)
